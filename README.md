@@ -2,40 +2,67 @@
 
 一个嵌入工作流的Chrome浏览器插件，帮助硬件工程师、采购专员和小型贸易商快速查询电子料号的替代料和跨平台比价信息。
 
+## 📊 项目状态
+
+### 开发阶段
+**当前版本**: 1.0.0
+**开发状态**: 已完成核心功能开发，进入测试阶段
+**发布状态**: 内部测试版，即将提交Chrome商店
+
 ## 🌟 功能特点
 
-### 核心功能
-- **智能触发**：在网页中选中料号，右键一键查询
-- **聚合结果面板**：右侧弹窗显示所有查询结果
-- **替代料推荐**：来自多个数据源的替代型号推荐，标注替代类型和关键差异
-- **跨平台比价**：实时显示主流分销商的价格、库存和交货期
-- **风险快照**：产品生命周期状态、合规信息等关键数据
+### 已完成功能
 
-### 差异化亮点
-- **工作流嵌入**：零跳转查询，无需切换标签页
-- **决策辅助**：综合推荐指数，根据价格、库存、交期等自动排序
-- **聚焦中国供应链**：加强国产替代料标注和推荐
-- **支持多种场景**：PDF规格书、Excel物料清单、网页自动识别
+#### 核心功能
+- ✅ **智能触发**：在网页中选中料号，右键一键查询
+- ✅ **聚合结果面板**：右侧弹窗显示所有查询结果
+- ✅ **替代料推荐**：来自多个数据源的替代型号推荐，标注替代类型和关键差异
+- ✅ **跨平台比价**：实时显示主流分销商的价格、库存和交货期
+- ✅ **风险快照**：产品生命周期状态、合规信息等关键数据
+
+#### 技术实现
+- ✅ **前端扩展**：Chrome Extension (Manifest V3)
+- ✅ **后端服务**：Node.js + Express
+- ✅ **模拟数据**：完整的模拟数据生成系统
+- ✅ **缓存机制**：内存缓存，提升查询效率
+- ✅ **Docker容器化**：完整的Docker打包和部署方案
+- ✅ **自动化打包**：一键生成可安装的ZIP包
+- ✅ **代码提交**：GitHub仓库完整提交
+
+### 待实现功能
+
+#### 核心功能增强
+- ⏳ **真实API接入**：接入芯查查、芯片智选等真实数据源
+- ⏳ **AI推荐**：使用机器学习算法优化替代料推荐
+- ⏳ **BOM表分析**：支持上传和分析完整的BOM表
+- ⏳ **导出功能**：支持将查询结果导出为Excel或PDF
+
+#### 技术优化
+- ⏳ **多浏览器支持**：扩展到Firefox、Edge等浏览器
+- ⏳ **企业版功能**：团队协作、历史记录、权限管理
+- ⏳ **性能优化**：提升查询速度和响应时间
+- ⏳ **单元测试**：完善的测试覆盖
 
 ## 🚀 快速开始
 
 ### 1. 安装插件
 
-#### 方法一：Chrome商店安装（待发布）
-1. 打开Chrome浏览器
-2. 访问Chrome网上应用店
-3. 搜索"电子料替代与比价助手"
-4. 点击"添加至Chrome"
-
-#### 方法二：本地开发模式安装
+#### 方法一：本地开发模式安装
 1. 下载或克隆本项目到本地
 2. 打开Chrome浏览器，访问 `chrome://extensions/`
 3. 开启右上角"开发者模式"
 4. 点击"加载已解压的扩展程序"
 5. 选择项目根目录
 
+#### 方法二：使用打包好的ZIP文件
+1. 从 `dist` 目录获取最新的ZIP安装包
+2. 打开Chrome浏览器，访问 `chrome://extensions/`
+3. 开启右上角"开发者模式"
+4. 直接拖拽ZIP文件到扩展页面
+
 ### 2. 启动后端服务
 
+#### 方式一：直接运行
 ```bash
 # 进入后端目录
 cd backend
@@ -47,13 +74,32 @@ npm install
 npm start
 ```
 
+#### 方式二：使用Docker Compose
+```bash
+# 开发环境启动
+docker-compose up -d
+
+# 生产环境启动（包含Nginx）
+docker-compose --profile production up -d
+```
+
 后端服务默认运行在 `http://localhost:3000`
 
-### 3. 使用插件
+### 3. 环境配置
+
+1. 复制环境变量示例文件
+```bash
+cp backend/.env.example backend/.env
+```
+
+2. 配置环境变量
+编辑 `backend/.env` 文件，配置API密钥（可选，当前支持模拟数据）
+
+### 4. 使用插件
 
 1. 打开任意网页（如测试页面 `test.html`）
 2. 选中一个料号，如 `ATMEGA328P-PU`
-3. 右键选择"查询料号"
+3. 右键选择"查询料号: ATMEGA328P-PU"
 4. 观察右侧弹出的查询结果面板
 
 ## 📖 详细使用说明
@@ -95,82 +141,64 @@ npm start
 
 ### 环境要求
 
-- Node.js 14+（用于运行后端服务）
+- Node.js 18+（用于运行后端服务）
 - Chrome浏览器 90+（支持Manifest V3）
+- Docker 20.10.0+（可选，用于容器化部署）
+- Docker Compose 2.0.0+（可选，用于多容器部署）
 
-### 后端部署
+### 部署方式
 
-1. 克隆项目到服务器
+#### 1. 传统部署
 
 ```bash
+# 克隆项目
 git clone <项目地址>
-cd <项目目录>/backend
-```
+cd <项目目录>
 
-2. 安装依赖
-
-```bash
+# 安装后端依赖
+cd backend
 npm install --production
+
+# 启动服务
+npm start
 ```
 
-3. 启动服务
+#### 2. Docker部署
 
 ```bash
-# 直接启动
-npm start
+# 构建镜像
+docker-compose build
 
-# 或使用进程管理工具
-pm install -g pm2
-pm run build
-pm run start:prod
+# 启动服务
+docker-compose up -d
 ```
 
-4. 配置环境变量（必需）
+#### 3. 生产环境部署
 
-创建 `.env` 文件，配置以下环境变量：
-
-```env
-# 服务器配置
-PORT=3000
-
-# 立创商城API配置
-LCSC_API_KEY=your_lcsc_api_key
-
-# DigiKey API配置
-DIGIKEY_CLIENT_ID=your_digikey_client_id
-DIGIKEY_CLIENT_SECRET=your_digikey_client_secret
-
-# 云汉芯城API配置
-ICKEY_API_KEY=your_ickey_api_key
-
-# 芯查查API配置（可选）
-ICCHAX_API_KEY=your_icchax_api_key
-
-# Mouser API配置（可选）
-MOUSER_API_KEY=your_mouser_api_key
-
-# Arrow API配置（可选）
-ARROW_API_KEY=your_arrow_api_key
-
-# 替代料API配置
-ALTERNATIVE_API_KEY=your_alternative_api_key
-
-# 风险信息API配置
-RISK_INFO_API_KEY=your_risk_info_api_key
+```bash
+# 启动生产环境服务（包含Nginx反向代理）
+docker-compose --profile production up -d
 ```
 
-**说明**：
-- 复制 `backend/.env.example` 文件为 `backend/.env` 并填充实际API密钥
-- 至少需要配置立创商城API密钥以获取基本功能
-- 其他API密钥为可选，配置后可获得更全面的数据
-- 请确保保护好您的API密钥，不要将其提交到版本控制
+### 配置说明
 
-### 前端配置
+#### 环境变量配置
+
+| 变量名 | 描述 | 示例值 | 是否必填 |
+|-------|------|--------|----------|
+| PORT | 服务器端口 | 3000 | 否（默认3000） |
+| NODE_ENV | 运行环境 | production | 否（默认production） |
+| LCSC_API_KEY | 立创商城API密钥 | your_api_key | 否（支持模拟数据） |
+| DIGIKEY_CLIENT_ID | DigiKey API客户端ID | your_client_id | 否（支持模拟数据） |
+| DIGIKEY_CLIENT_SECRET | DigiKey API客户端密钥 | your_client_secret | 否（支持模拟数据） |
+| ICKEY_API_KEY | 云汉芯城API密钥 | your_api_key | 否（支持模拟数据） |
+
+#### 前端配置
 
 如果后端服务部署在不同的域名或端口，需要修改 `background.js` 中的API地址：
 
 ```javascript
-// background.js
+// background.js 第64行
 const response = await fetch(`http://<your-server>:<port>/api/part/${encodeURIComponent(partNumber)}`);
 ```
 
@@ -179,36 +207,40 @@ const response = await fetch(`http://<your-server>:<port>/api/part/${encodeURICo
 ### 项目结构
 
 ```
-├── manifest.json      # 插件配置文件（Manifest V3）
-├── background.js      # 后台服务脚本
-├── content.js         # 内容脚本，处理网页交互
-├── popup.html         # 插件图标点击弹窗
-├── popup.js           # 弹窗交互脚本
-├── icons/             # 插件图标目录
-├── ui-designs/        # UI设计文档和效果图
-│   ├── popup-demo.html              # 主弹窗设计示例
-│   ├── loading-popup-demo.html      # 加载弹窗设计示例
-│   ├── error-popup-demo.html        # 错误弹窗设计示例
-│   ├── result-popup-demo.html       # 结果弹窗设计示例
-│   └── *.png                        # 设计效果图（PNG格式）
-├── backend/           # 后端代理服务
-│   ├── server.js      # 主服务器文件
-│   ├── package.json   # 后端依赖配置
-│   └── .env.example   # 环境变量示例文件
-├── test.html          # 测试页面
-├── .gitignore         # Git忽略文件配置
-└── README.md          # 项目说明文档
+├── manifest.json          # 插件配置文件（Manifest V3）
+├── background.js          # 后台服务脚本
+├── content.js             # 内容脚本，处理网页交互
+├── popup.html             # 插件图标点击弹窗
+├── popup.js               # 弹窗交互脚本
+├── icons/                 # 插件图标目录
+├── ui-designs/            # UI设计文档和效果图
+├── backend/               # 后端代理服务
+│   ├── Dockerfile         # 后端Dockerfile
+│   ├── package.json       # 后端依赖配置
+│   ├── server.js          # 主服务器文件
+│   └── .env.example       # 环境变量示例文件
+├── dist/                  # 打包输出目录
+├── doc/                   # 项目文档
+│   ├── 需求文档.md        # 详细需求文档
+│   └── Docker部署方案.md  # Docker部署文档
+├── test.html              # 测试页面
+├── package.json           # 前端打包配置
+├── build.js               # 打包脚本
+├── validate.js            # 验证脚本
+├── docker-compose.yml     # Docker Compose配置
+├── .gitignore             # Git忽略文件配置
+└── README.md              # 项目说明文档
 ```
 
 ### 开发流程
 
-1. 前端开发
+#### 1. 前端开发
 
 ```bash
 # 修改前端代码后，在Chrome扩展页面点击"刷新"按钮
 ```
 
-2. 后端开发
+#### 2. 后端开发
 
 ```bash
 # 进入后端目录
@@ -218,38 +250,105 @@ cd backend
 npm run dev
 ```
 
+#### 3. 打包测试
+
+```bash
+# 安装打包依赖
+npm install
+
+# 执行打包
+npm run package
+
+# 查看打包结果
+ls -la dist/
+```
+
 ### 技术栈
 
-- 前端：原生JavaScript、Chrome Extension API
-- 后端：Node.js、Express
-- 数据交互：RESTful API
+- **前端**: 原生JavaScript、Chrome Extension API (Manifest V3)
+- **后端**: Node.js、Express
+- **数据交互**: RESTful API
+- **容器化**: Docker、Docker Compose
+- **开发工具**: Visual Studio Code
 
-## ❓ 常见问题
+## ❓ 常见问题及解决方案
 
 ### Q: 插件无法识别料号？
 A: 目前插件使用简单的正则表达式识别料号，格式为5-20个字母数字组合。对于复杂格式的料号，建议手动选中查询。
 
 ### Q: 查询结果不准确？
-A: 目前使用模拟数据，实际应用中需要接入真实的数据源API。
+A: 当前版本使用模拟数据，实际应用中需要接入真实的数据源API。模拟数据旨在展示功能和界面。
 
 ### Q: 后端服务启动失败？
-A: 请检查Node.js版本是否符合要求（14+），并确保3000端口未被占用。
+A: 请检查以下几点：
+   1. Node.js版本是否符合要求（18+）
+   2. 3000端口是否被占用
+   3. 依赖是否正确安装（执行 `npm install`）
+   4. 查看日志获取详细错误信息
 
 ### Q: 插件没有右键菜单？
-A: 请确保插件已正确安装，并且在当前网页有选中的文本内容。
+A: 请确保：
+   1. 插件已正确安装
+   2. 在当前网页有选中的文本内容
+   3. 浏览器版本支持Manifest V3
+
+### Q: Docker部署失败？
+A: 请检查以下几点：
+   1. Docker服务是否正在运行
+   2. 端口是否被占用
+   3. 查看Docker日志获取详细错误信息
+   ```bash
+   docker-compose logs -f
+   ```
+
+### Q: API访问超时？
+A: 当前网络环境可能无法访问某些API提供商，建议：
+   1. 检查网络连接
+   2. 确认防火墙设置
+   3. 暂时使用模拟数据（不配置API密钥）
 
 ## 📈 未来规划
 
-1. **数据接入**：接入真实的数据源API（芯查查、芯片智选等）
-2. **AI推荐**：使用机器学习算法优化替代料推荐
-3. **BOM表分析**：支持上传和分析完整的BOM表
-4. **导出功能**：支持将查询结果导出为Excel或PDF
-5. **多浏览器支持**：扩展到Firefox、Edge等浏览器
-6. **企业版功能**：团队协作、历史记录、权限管理
+### 短期计划（1-2个月）
+1. 接入真实数据源API（芯查查、芯片智选等）
+2. 优化替代料推荐算法
+3. 完善UI设计和用户体验
+4. 提交Chrome网上应用店
 
-## 🤝 贡献
+### 长期计划（3-6个月）
+1. **BOM表分析**：支持上传和分析完整的BOM表
+2. **导出功能**：支持将查询结果导出为Excel或PDF
+3. **多浏览器支持**：扩展到Firefox、Edge等浏览器
+4. **企业版功能**：团队协作、历史记录、权限管理
+5. **移动端适配**：支持移动端浏览器
+6. **AI增强**：使用机器学习优化替代料推荐
+
+## 🤝 贡献指南
 
 欢迎提交Issue和Pull Request！
+
+### 贡献流程
+
+1. Fork本项目
+2. 创建功能分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 开启Pull Request
+
+### 代码规范
+
+- 遵循JavaScript Standard Style
+- 保持代码简洁明了
+- 添加必要的注释
+- 提交前运行打包测试 (`npm run package`)
+
+### 报告问题
+
+如果您发现bug或有功能建议，请：
+1. 检查是否已有相关Issue
+2. 开启新Issue，提供详细描述
+3. 包括复现步骤、预期结果和实际结果
+4. 如有可能，提供截图或日志
 
 ## 📄 许可证
 
@@ -258,8 +357,9 @@ MIT License
 ## 📞 联系方式
 
 如有问题或建议，欢迎联系我们：
-- 项目地址：<git@github.com:yangpengfi/EC-RP-Comparator.git>
-- 邮箱：<pf0410y@gmail.com>
+- **项目地址**: https://github.com/yangpengfi/EC-RP-Comparator
+- **邮箱**: pf0410y@gmail.com
+- **开发者**: 开发团队
 
 ---
 
