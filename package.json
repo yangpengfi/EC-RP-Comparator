@@ -1,0 +1,24 @@
+{
+  "name": "ec-rp-comparator",
+  "version": "1.0.0",
+  "description": "电子料替代与比价助手 - Chrome浏览器扩展",
+  "main": "background.js",
+  "scripts": {
+    "build": "node build.js",
+    "validate": "node validate.js",
+    "package": "npm run build && npm run validate",
+    "clean": "rm -rf dist && rm -rf build.log"
+  },
+  "keywords": [
+    "chrome-extension",
+    "electronic-components",
+    "price-comparison",
+    "alternative-search"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "archiver": "^6.0.1",
+    "fs-extra": "^11.2.0"
+  }
+}
