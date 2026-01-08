@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>电子料替代与比价助手 - 测试页面</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    h1 {
+      color: #1967d2;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    h2 {
+      color: #333;
+      margin-top: 30px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e0e0e0;
+    }
+    .test-section {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .part-number {
+      font-family: monospace;
+      background: #e8f0fe;
+      color: #1967d2;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      user-select: all;
+    }
+    .part-number:hover {
+      background: #d0e3ff;
+    }
+    .instruction {
+      background: #fff3cd;
+      color: #856404;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background: #f1f3f4;
+      font-weight: bold;
+    }
+    .code-block {
+      background: #f6f8fa;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: monospace;
+      margin: 15px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>电子料替代与比价助手 - 测试页面</h1>
+  
+  <div class="instruction">
+    <strong>使用说明：</strong>
+    <ul>
+      <li>1. 选中下面的料号文本，右键选择"查询料号"</li>
+      <li>2. 或点击插件图标，在弹窗中输入料号查询</li>
+      <li>3. 观察右侧弹出的查询结果面板</li>
+    </ul>
+  </div>
+  
+  <div class="test-section">
+    <h2>1. 单个料号测试</h2>
+    <p>尝试查询以下料号：</p>
+    <p><span class="part-number">ATMEGA328P-PU</span> - Arduino Uno 主控芯片</p>
+    <p><span class="part-number">STM32F103C8T6</span> - 常用ARM Cortex-M3芯片</p>
+    <p><span class="part-number">ESP8266EX</span> - WiFi模块芯片</p>
+  </div>
+  
+  <div class="test-section">
+    <h2>2. 料号列表测试</h2>
+    <p>以下是一个模拟的BOM表，尝试查询其中的料号：</p>
+    <table>
+      <thead>
+        <tr>
+          <th>序号</th>
+          <th>料号</th>
+          <th>描述</th>
+          <th>数量</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><span class="part-number">ATMEGA328P-PU</span></td>
+          <td>8位微控制器</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><span class="part-number">STM32F103C8T6</span></td>
+          <td>32位ARM微控制器</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><span class="part-number">ESP8266EX</span></td>
+          <td>WiFi芯片</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><span class="part-number">LM7805</span></td>
+          <td>5V稳压器</td>
+          <td>2</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="test-section">
+    <h2>3. 模拟规格书文本</h2>
+    <p>以下是一段模拟的芯片规格书文本，插件会自动识别其中的料号：</p>
+    <div class="code-block">
+      <strong>产品规格书</strong><br>
+      型号：<span class="part-number">ATMEGA328P-PU</span><br>
+      封装：DIP-28<br>
+      工艺：CMOS<br>
+      工作电压：1.8V - 5.5V<br>
+      工作温度：-40°C 至 85°C<br>
+      替代型号：<span class="part-number">ATMEGA328P-AU</span> (TQFP-32封装)<br>
+      <br>
+      <strong>推荐应用：</strong><br>
+      - Arduino开发板<br>
+      - 嵌入式控制系统<br>
+      - 传感器节点
+    </div>
+  </div>
+  
+  <div class="test-section">
+    <h2>4. 性能测试</h2>
+    <p>尝试连续查询多个料号，测试插件的性能：</p>
+    <p>
+      <span class="part-number">ATMEGA328P-PU</span>、
+      <span class="part-number">STM32F103C8T6</span>、
+      <span class="part-number">ESP8266EX</span>、
+      <span class="part-number">LM7805</span>、
+      <span class="part-number">LM317</span>、
+      <span class="part-number">1N4148</span>
+    </p>
+  </div>
+  
+  <script>
+    // 页面加载完成后提示
+    window.addEventListener('load', () => {
+      console.log('电子料替代与比价助手 - 测试页面已加载');
+      console.log('插件功能：');
+      console.log('1. 右键查询选中的料号');
+      console.log('2. 插件图标手动输入查询');
+      console.log('3. 自动识别网页中的料号');
+    });
+  </script>
+</body>
+</html>

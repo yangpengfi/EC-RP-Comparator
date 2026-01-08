@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- 背景圆形 -->
+  <circle cx="64" cy="64" r="60" fill="#1967d2" stroke="#1557b0" stroke-width="4"/>
+  
+  <!-- 电路板元素 -->
+  <rect x="32" y="32" width="64" height="64" rx="4" fill="#ffffff" opacity="0.1"/>
+  <path d="M40 40 L88 40 M40 88 L88 88 M40 40 L40 88 M88 40 L88 88" stroke="#ffffff" stroke-width="2" opacity="0.2"/>
+  <path d="M52 52 L76 52 M52 76 L76 76 M52 52 L52 76 M76 52 L76 76" stroke="#ffffff" stroke-width="2" opacity="0.3"/>
+  
+  <!-- 交换箭头 -->
+  <g transform="translate(64, 64)" fill="#ffffff">
+    <!-- 上箭头 -->
+    <path d="M-20 10 L0 -10 L20 10 M0 -10 L0 30" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- 下箭头 -->
+    <path d="M-20 -10 L0 10 L20 -10 M0 10 L0 -30" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  
+  <!-- 价格标签元素 -->
+  <g transform="translate(64, 30)" fill="#ffffff" opacity="0.9">
+    <rect x="-12" y="-8" width="24" height="16" rx="2"/>
+    <text x="0" y="5" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle">$</text>
+  </g>
+</svg>

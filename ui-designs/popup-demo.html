@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Popup UI设计展示</title>
+  <style>
+    /* 模拟浏览器插件弹窗的容器 */
+    .popup-container {
+      width: 360px;
+      height: 400px;
+      margin: 50px auto;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    /* 完整复制 popup.html 的样式 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      width: 360px;
+      min-height: 200px;
+      padding: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #333;
+    }
+    
+    .container {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    
+    .icon {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 12px;
+      background: linear-gradient(135deg, #1967d2 0%, #1557b0 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(25, 103, 210, 0.3);
+    }
+    
+    h1 {
+      font-size: 18px;
+      margin: 0;
+      color: #2c3e50;
+      font-weight: 600;
+    }
+    
+    .input-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #555;
+      font-size: 13px;
+    }
+    
+    input[type="text"] {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      box-sizing: border-box;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      background: #fafafa;
+    }
+    
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #1967d2;
+      background: white;
+      box-shadow: 0 0 0 3px rgba(25, 103, 210, 0.1);
+    }
+    
+    button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #1967d2 0%, #1557b0 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 16px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(25, 103, 210, 0.2);
+    }
+    
+    button:hover {
+      background: linear-gradient(135deg, #1557b0 0%, #134e96 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(25, 103, 210, 0.3);
+    }
+    
+    button:active {
+      transform: translateY(0);
+    }
+    
+    .instructions {
+      font-size: 12px;
+      color: #7f8c8d;
+      border-top: 1px solid #ecf0f1;
+      padding-top: 16px;
+    }
+    
+    .instructions h3 {
+      font-size: 13px;
+      margin: 0 0 10px 0;
+      color: #34495e;
+      font-weight: 600;
+    }
+    
+    .instructions ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    
+    .instructions li {
+      margin-bottom: 6px;
+      position: relative;
+    }
+    
+    .instructions li::before {
+      content: '✓';
+      position: absolute;
+      left: -16px;
+      color: #1967d2;
+      font-weight: bold;
+      font-size: 11px;
+    }
+    
+    /* 响应式设计 */
+    @media (max-width: 380px) {
+      body {
+        width: 320px;
+        padding: 16px;
+      }
+      
+      .container {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="popup-container">
+    <div class="container">
+      <div class="header">
+        <div class="icon">🔄</div>
+        <h1>电子料替代与比价助手</h1>
+      </div>
+      
+      <div class="input-group">
+        <label for="partNumber">输入料号</label>
+        <input type="text" id="partNumber" placeholder="例如: ATMEGA328P-PU">
+      </div>
+      
+      <button id="searchBtn">查询</button>
+      
+      <div class="instructions">
+        <h3>使用说明</h3>
+        <ul>
+          <li>在网页中选中料号，右键选择"查询料号"</li>
+          <li>或在此输入料号手动查询</li>
+          <li>支持自动识别PDF、Excel和网页中的料号</li>
+          <li>显示跨平台比价和替代料推荐</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <div style="text-align: center; margin-top: 20px; font-family: Arial, sans-serif;">
+    <p>这是插件的Popup页面设计效果</p>
+    <p>使用了渐变背景、卡片布局和现代化的UI元素</p>
+  </div>
+</body>
+</html>

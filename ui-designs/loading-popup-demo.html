@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>加载弹窗UI设计展示</title>
+  <style>
+    /* 模拟网页背景 */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* 模拟网页内容 */
+    .web-content {
+      width: 100%;
+      max-width: 800px;
+      background-color: white;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* 加载弹窗样式 */
+    #part-search-popup {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 420px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      z-index: 99999;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      font-size: 14px;
+      animation: slideInRight 0.3s ease-out;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <!-- 模拟网页内容 -->
+  <div class="web-content">
+    <h1>示例网页</h1>
+    <p>这是一个模拟的网页内容，展示插件的加载弹窗效果。</p>
+    <p>在实际使用中，当用户查询料号时，会在页面右上角显示加载弹窗。</p>
+    <p>料号示例：ATMEGA328P-PU, STM32F103C8T6, LM358P</p>
+  </div>
+
+  <!-- 加载弹窗 -->
+  <div id="part-search-popup">
+    <div style="padding: 20px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+      <div style="width: 50px; height: 50px; margin-bottom: 16px; border: 3px solid #f0f2f5; border-top-color: #1967d2; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+      <h3 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 600; color: #2c3e50;">正在查询</h3>
+      <p style="margin: 0; color: #7f8c8d; font-size: 14px;">料号: ATMEGA328P-PU</p>
+      <p style="margin: 8px 0 0 0; color: #95a5a6; font-size: 12px;">正在搜索最佳价格和替代方案...</p>
+    </div>
+  </div>
+
+  <div style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); text-align: center; font-family: Arial, sans-serif;">
+    <p>这是插件的加载弹窗设计效果</p>
+    <p>当用户查询料号时，会在页面右上角显示此弹窗</p>
+  </div>
+</body>
+</html>

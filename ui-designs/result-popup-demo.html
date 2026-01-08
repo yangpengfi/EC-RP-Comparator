@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>结果弹窗UI设计展示</title>
+  <style>
+    /* 模拟网页背景 */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* 模拟网页内容 */
+    .web-content {
+      width: 100%;
+      max-width: 800px;
+      background-color: white;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* 结果弹窗样式 */
+    #part-search-popup {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 500px;
+      max-height: 700px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.18);
+      z-index: 99999;
+      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      font-size: 14px;
+      animation: slideInRight 0.3s ease-out;
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    /* 表格行悬停效果 */
+    tr:hover {
+      background: #f8fafc;
+      transform: translateX(4px);
+      transition: all 0.2s ease;
+    }
+
+    /* 替代料卡片悬停效果 */
+    .alternative-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      border-color: #1967d2;
+      transition: all 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <!-- 模拟网页内容 -->
+  <div class="web-content">
+    <h1>示例网页</h1>
+    <p>这是一个模拟的网页内容，展示插件的结果弹窗效果。</p>
+    <p>在实际使用中，当料号查询成功时，会在页面右上角显示详细的查询结果。</p>
+    <p>料号示例：ATMEGA328P-PU, STM32F103C8T6, LM358P</p>
+  </div>
+
+  <!-- 结果弹窗 -->
+  <div id="part-search-popup">
+    <!-- 弹窗标题和关闭按钮 -->
+    <div style="padding: 20px; background: linear-gradient(135deg, #1967d2 0%, #1557b0 100%); color: white; display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <h3 style="margin: 0; font-size: 18px; font-weight: 600;">料号查询结果</h3>
+        <p style="margin: 4px 0 0 0; font-size: 12px; opacity: 0.9;">2026/01/06 16:30:00</p>
+      </div>
+      <button id="popup-close" style="background: rgba(255, 255, 255, 0.2); border: none; border-radius: 50%; width: 32px; height: 32px; color: white; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">×</button>
+    </div>
+    
+    <div style="padding: 24px; overflow-y: auto; max-height: calc(700px - 80px);">
+      <!-- 基本信息卡片 -->
+      <div style="margin-bottom: 24px; padding: 20px; background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border-radius: 12px; border-left: 4px solid #1967d2;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+          <div>
+            <h4 style="margin: 0 0 4px 0; font-size: 16px; font-weight: 600; color: #2c3e50;">ATMEGA328P-PU</h4>
+            <p style="margin: 0; color: #7f8c8d; font-size: 12px;">8位AVR微控制器，2KB SRAM，32KB Flash</p>
+          </div>
+          <span style="background: #e6f4ea; color: #188038; padding: 4px 12px; border-radius: 16px; font-size: 12px; font-weight: 600;">查询成功</span>
+        </div>
+        <div style="display: flex; flex-wrap: gap; gap: 12px;">
+          <span style="background: #e8f0fe; color: #1967d2; padding: 6px 12px; border-radius: 16px; font-size: 12px; font-weight: 500; display: flex; align-items: center;">
+            <span style="margin-right: 4px;">📊</span>生命周期: 量产中
+          </span>
+          <span style="background: #e6f4ea; color: #188038; padding: 6px 12px; border-radius: 16px; font-size: 12px; font-weight: 500; display: flex; align-items: center;">
+            <span style="margin-right: 4px;">✅</span>RoHS: 符合
+          </span>
+          <span style="background: #fef3c7; color: #d97706; padding: 6px 12px; border-radius: 16px; font-size: 12px; font-weight: 500; display: flex; align-items: center;">
+            <span style="margin-right: 4px;">⏱️</span>更新于: 16:30
+          </span>
+        </div>
+      </div>
+      
+      <!-- 跨平台比价 -->
+      <div style="margin-bottom: 28px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <h4 style="margin: 0; font-size: 17px; font-weight: 600; color: #2c3e50; display: flex; align-items: center;">
+            <span style="margin-right: 10px; color: #1967d2; font-size: 20px;">💰</span>
+            跨平台比价
+          </h4>
+          <span style="background: #e8f0fe; color: #1967d2; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600;">5 个平台</span>
+        </div>
+        <div style="overflow-x: auto; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);">
+          <table style="width: 100%; border-collapse: collapse; min-width: 450px;">
+            <thead>
+              <tr style="background: #f8fafc;">
+                <th style="text-align: left; padding: 14px 12px; font-weight: 600; color: #374151; font-size: 13px; border-bottom: 2px solid #e2e8f0;">平台</th>
+                <th style="text-align: right; padding: 14px 12px; font-weight: 600; color: #374151; font-size: 13px; border-bottom: 2px solid #e2e8f0;">价格</th>
+                <th style="text-align: center; padding: 14px 12px; font-weight: 600; color: #374151; font-size: 13px; border-bottom: 2px solid #e2e8f0;">库存</th>
+                <th style="text-align: center; padding: 14px 12px; font-weight: 600; color: #374151; font-size: 13px; border-bottom: 2px solid #e2e8f0;">交期</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid #f1f5f9; transition: all 0.2s ease; cursor: pointer;">
+                <td style="padding: 14px 12px; font-weight: 600; color: #1967d2; display: flex; align-items: center;">
+                  <div style="width: 8px; height: 8px; background: #188038; border-radius: 50%; margin-right: 8px;"></div>
+                  立创商城
+                </td>
+                <td style="text-align: right; padding: 14px 12px; font-weight: 700; font-size: 15px; color: #188038;">¥15.20</td>
+                <td style="text-align: center; padding: 14px 12px;">
+                  <span style="background: #e6f4ea; color: #188038; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">1256</span>
+                </td>
+                <td style="text-align: center; padding: 14px 12px;">
+                  <span style="background: #e6f4ea; color: #188038; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">现货</span>
+                </td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f1f5f9; transition: all 0.2s ease; cursor: pointer;">
+                <td style="padding: 14px 12px; font-weight: 600; color: #1967d2; display: flex; align-items: center;">
+                  <div style="width: 8px; height: 8px; background: #6b7280; border-radius: 50%; margin-right: 8px;"></div>
+                  DigiKey
+                </td>
+                <td style="text-align: right; padding: 14px 12px; font-weight: 700; font-size: 15px; color: #2c3e50;">$2.35</td>
+                <td style="text-align: center; padding: 14px 12px;">
+                  <span style="background: #e6f4ea; color: #188038; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">5890</span>
+                </td>
+                <td style="text-align: center; padding: 14px 12px;">
+                  <span style="background: #fff3cd; color: #856404; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">1-2天</span>
+                </td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f1f5f9; transition: all 0.2s ease; cursor: pointer;">
+                <td style="padding: 14px 12px; font-weight: 600; color: #1967d2; display: flex; align-items: center;">
+                  <div style="width: 8px; height: 8px; background: #6b7280; border-radius: 50%; margin-right: 8px;"></div>
+                  云汉芯城
+                </td>
+                <td style="text-align: right; padding: 14px 12px; font-weight: 700; font-size: 15px; color: #2c3e50;">¥15.80</td>
+                <td style="text-align: center; padding: 14px 12px;">
+                  <span style="background: #e6f4ea; color: #188038; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">890</span>
+                </td>
+                <td style="text-align: center; padding: 14px 12px;">
+                  <span style="background: #e6f4ea; color: #188038; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">现货</span>
+                </td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f1f5f9; transition: all 0.2s ease; cursor: pointer;">
+                <td style="padding: 14px 12px; font-weight: 600; color: #1967d2; display: flex; align-items: center;">
+                  <div style="width: 8px; height: 8px; background: #6b7280; border-radius: 50%; margin-right: 8px;"></div>
+                  Mouser
+                </td>
+                <td style="text-align: right; padding: 14px 12px; font-weight: 700; font-size: 15px; color: #2c3e50;">$2.42</td>
+                <td style="text-align: center; padding: 14px 12px;">
+                  <span style="background: #e6f4ea; color: #188038; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">3450</span>
+                </td>
+                <td style="text-align: center; padding: 14px 12px;">
+                  <span style="background: #fff3cd; color: #856404; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">2-3天</span>
+                </td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f1f5f9; transition: all 0.2s ease; cursor: pointer;">
+                <td style="padding: 14px 12px; font-weight: 600; color: #1967d2; display: flex; align-items: center;">
+                  <div style="width: 8px; height: 8px; background: #6b7280; border-radius: 50%; margin-right: 8px;"></div>
+                  Arrow
+                </td>
+                <td style="text-align: right; padding: 14px 12px; font-weight: 700; font-size: 15px; color: #2c3e50;">$2.38</td>
+                <td style="text-align: center; padding: 14px 12px;">
+                  <span style="background: #fee2e2; color: #ef4444; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">23</span>
+                </td>
+                <td style="text-align: center; padding: 14px 12px;">
+                  <span style="background: #fff3cd; color: #856404; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">5-7天</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="font-size: 12px; color: #9ca3af; margin-top: 10px; text-align: right;">
+          <span style="display: flex; align-items: center; justify-content: flex-end;">
+            <span style="margin-right: 4px;">🔗</span>点击任意一行跳转到对应平台
+          </span>
+        </div>
+      </div>
+      
+      <!-- 替代料推荐 -->
+      <div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <h4 style="margin: 0; font-size: 17px; font-weight: 600; color: #2c3e50; display: flex; align-items: center;">
+            <span style="margin-right: 10px; color: #1967d2; font-size: 20px;">🔄</span>
+            替代料推荐
+          </h4>
+          <span style="background: #e8f0fe; color: #1967d2; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600;">2 个推荐</span>
+        </div>
+        <div class="alternative-card" style="background: white; padding: 20px; border-radius: 12px; margin-bottom: 16px; border: 1px solid #e2e8f0; transition: all 0.3s ease; cursor: pointer; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px;">
+            <div>
+              <div style="font-weight: 600; font-size: 16px; color: #2c3e50; margin-bottom: 4px;">ATMEGA328P-AU</div>
+              <div style="font-size: 12px; color: #6b7280; display: flex; align-items: center;">
+                <span style="margin-right: 4px;">🏭</span>来源: 立创商城
+              </div>
+            </div>
+            <span style="background: #e6f4ea; color: #188038; padding: 6px 12px; border-radius: 16px; font-size: 12px; font-weight: 600;">直接替代</span>
+          </div>
+          <div style="margin-bottom: 12px;">
+            <div style="font-size: 12px; font-weight: 600; color: #374151; margin-bottom: 6px;">主要差异:</div>
+            <div style="font-size: 13px; color: #4b5563; line-height: 1.5; background: #f9fafb; padding: 12px; border-radius: 8px; border-left: 3px solid #d1d5db;">封装不同，AU为TQFP-32封装，PU为PDIP-28封装</div>
+          </div>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <span style="background: #f3f4f6; color: #374151; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 500;">封装: TQFP-32</span>
+            <span style="background: #f3f4f6; color: #374151; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 500;">价格: ¥18.50</span>
+            <span style="background: #f3f4f6; color: #374151; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 500;">库存: 567</span>
+          </div>
+        </div>
+        <div class="alternative-card" style="background: white; padding: 20px; border-radius: 12px; margin-bottom: 16px; border: 1px solid #e2e8f0; transition: all 0.3s ease; cursor: pointer; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px;">
+            <div>
+              <div style="font-weight: 600; font-size: 16px; color: #2c3e50; margin-bottom: 4px;">STM32F030F4P6</div>
+              <div style="font-size: 12px; color: #6b7280; display: flex; align-items: center;">
+                <span style="margin-right: 4px;">🏭</span>来源: DigiKey
+              </div>
+            </div>
+            <span style="background: #fff3cd; color: #856404; padding: 6px 12px; border-radius: 16px; font-size: 12px; font-weight: 600;">功能替代</span>
+          </div>
+          <div style="margin-bottom: 12px;">
+            <div style="font-size: 12px; font-weight: 600; color: #374151; margin-bottom: 6px;">主要差异:</div>
+            <div style="font-size: 13px; color: #4b5563; line-height: 1.5; background: #f9fafb; padding: 12px; border-radius: 8px; border-left: 3px solid #d1d5db;">不同品牌不同系列，需要修改部分代码，但性能更优</div>
+          </div>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <span style="background: #f3f4f6; color: #374151; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 500;">封装: TSSOP-20</span>
+            <span style="background: #f3f4f6; color: #374151; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 500;">价格: $2.80</span>
+            <span style="background: #f3f4f6; color: #374151; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 500;">库存: 1234</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); text-align: center; font-family: Arial, sans-serif;">
+    <p>这是插件的结果弹窗设计效果</p>
+    <p>显示了跨平台比价信息和替代料推荐</p>
+  </div>
+
+  <script>
+    // 添加关闭按钮事件
+    const closeBtn = document.querySelector('#popup-close');
+    closeBtn.addEventListener('click', () => {
+      const popup = document.querySelector('#part-search-popup');
+      popup.remove();
+    });
+
+    // 添加表格行悬停效果
+    const rows = document.querySelectorAll('tr');
+    rows.forEach(row => {
+      if (row.parentElement.tagName === 'TBODY') {
+        row.addEventListener('mouseenter', () => {
+          row.style.background = '#f8fafc';
+          row.style.transform = 'translateX(4px)';
+        });
+        row.addEventListener('mouseleave', () => {
+          row.style.background = 'transparent';
+          row.style.transform = 'translateX(0)';
+        });
+      }
+    });
+  </script>
+</body>
+</html>
